@@ -1,21 +1,25 @@
 import {createAppContainer, createStackNavigator} from "react-navigation";
 import Login from "./screens/Login";
-import Principale from "./screens/Principale";
-import Prenotazioni from "./screens/Prenotazioni";
-import Riepilogo from "./screens/Riepilogo";
+import BarbierePrincipale from "./screens/BarbierePrincipale";
+import BarbierePrenotazioni from "./screens/BarbierePrenotazioni";
+import BarbiereRiepilogo from "./screens/BarbiereRiepilogo";
+import BookFoto from "./screens/BookFoto";
 const LoginNavigation = createStackNavigator({
     Login:{
         screen:Login,
     },
-    Principale:{
-        screen:Principale,
+    BarbierePrincipale:{
+        screen:BarbierePrincipale,
     },
-    Prenotazioni:{
-        screen:Prenotazioni,
+    BarbierePrenotazioni:{
+        screen:BarbierePrenotazioni,
     },
-    Riepilogo:{
-        screen:Riepilogo,
+    BarbiereRiepilogo:{
+        screen:BarbiereRiepilogo,
+    },
+    BookFoto:{
+        screen:BookFoto,
     },
 })
 const app = createAppContainer(LoginNavigation)
-export default app
+export default app 

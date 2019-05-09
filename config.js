@@ -1,12 +1,12 @@
 import Firebase from "firebase";
 const config = {
-  apiKey: "AIzaSyAvmrfzNmyx8m4fTSqReUuvXoFG1LkZdIo",
-  authDomain: "approcco10.firebaseapp.com",
-  databaseURL: "https://approcco10.firebaseio.com",
-  projectId: "approcco10",
-  storageBucket: "approcco10.appspot.com",
-  messagingSenderId: "849364465374"
+  apiKey: "AIzaSyDzTdvADLmHIdV2ofYRyEDWrtm2jJ8aaS8",
+  authDomain: "hair-rocco.firebaseapp.com",
+  databaseURL: "https://hair-rocco.firebaseio.com",
+  projectId: "hair-rocco",
+  storageBucket: "hair-rocco.appspot.com",
+  messagingSenderId: "647358661788",
+  appId: "1:647358661788:web:6a95d2e4bae748e5"
   };
-  let app = Firebase.initializeApp (config);
-  export const db = app.database();
-  
+export const firebase = Firebase.initializeApp (config);
+  export const db = firebase.database();

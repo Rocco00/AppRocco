@@ -1,7 +1,7 @@
 import React from "react";
 import {View,} from "react-native";
 import {Calendar} from "react-native-calendars";
-class Prenotazioni extends React.Component {
+class BarbierePrenotazioni extends React.Component {
     render (){
         return (
             <View>
@@ -14,10 +14,10 @@ class Prenotazioni extends React.Component {
                     hideArrows = { false }
                     firstDay = { 1 }
                     onDayPress ={(day)=>{
-                        this.props.navigation.navigate("Riepilogo")}}
+                        this.props.navigation.navigate("BarbiereRiepilogo")}}
                 />
             </View>
     )
         }
     }
-export default Prenotazioni
+export default BarbierePrenotazioni

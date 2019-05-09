@@ -1,6 +1,6 @@
 import React from "react";
 import {View,Image,StyleSheet,Text,TouchableOpacity} from "react-native";
-class Principale extends React.Component {
+class BarbierePrincipale extends React.Component {
     render () {
         return (
             <View style = {styles.centrale}>
@@ -12,8 +12,8 @@ class Principale extends React.Component {
                 </View>
                 <Image source = {require ("../calendario.png")} style = {styles.principale} resizeMode = "contain" />
                 <View style = {styles.ovale2}>
-                <TouchableOpacity onPress={()=>{
-                        this.props.navigation.navigate("Prenotazioni")}}>
+               <TouchableOpacity onPress={()=>{
+                        this.props.navigation.navigate("BarbierePrenotazioni")}}>
                 <Text style = {styles.testo}>
                     PRENOTAZIONI
                 </Text>
@@ -21,9 +21,12 @@ class Principale extends React.Component {
                 </View>
                 <Image source = {require ("../bookfoto.png")} style = {styles.principale} resizeMode = "contain" />
                 <View style = {styles.ovale3}> 
+                <TouchableOpacity onPress={()=>{
+                        this.props.navigation.navigate("BookFoto")}}>
                 <Text style = {styles.testo}>
                     BOOK FOTO
                 </Text>
+                </TouchableOpacity>
                 </View>
             </View>
         )
@@ -91,4 +94,4 @@ const styles = StyleSheet.create({
         paddingRight:10,
     },
 })
-export default Principale 
+export default BarbierePrincipale 

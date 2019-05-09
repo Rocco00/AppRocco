@@ -1,6 +1,11 @@
 import React from "react";
 import {View,Text,Image,TouchableOpacity,TextInput,StyleSheet} from "react-native";
+import {firebase} from "../config";
 class Login extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {}
+    }
     render (){
         return (
             <View style = {styles.centrale}>
@@ -10,15 +15,28 @@ class Login extends React.Component {
                     REGISTRATI
                 </Text>
                 </TouchableOpacity>
-                <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo}/>
-                <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo}/>
+                <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} onChangeText = {email => {
+                                                                                                                                        this.setState({email})}
+                                                                                                                                    }/>
+                <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {true}/>
                 <TouchableOpacity>
                 <Text style = {styles.scrittura}>
                     Hai dimenticato la password ?
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
-                        this.props.navigation.navigate("Principale") }}>
+                            console.log(this.state.email)
+                            const email = this.state.email
+                            console.log(this.state.password)
+                            const password = this.state.password
+                            firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
+                                this.props.navigation.navigate("BarbierePrincipale")
+                            }).catch(email => {
+                                console.log("errato")
+                            })
+                        }
+                    }   
+               >
                 <Text style = {styles.login}>
                     LOGIN
                 </Text>
@@ -49,6 +67,7 @@ const styles = StyleSheet.create({
         marginTop:15,
         marginBottom:15,
         padding:10,
+        width:300,
     },
     scrittura: {
         fontSize:20,
