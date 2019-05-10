@@ -4,7 +4,9 @@ import {firebase} from "../config";
 class Login extends React.Component {
     constructor(props){
         super(props)
-        this.state = {}
+        this.state = {
+            mostraPassword:true
+        }
     }
     render (){
         return (
@@ -18,28 +20,45 @@ class Login extends React.Component {
                 <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} onChangeText = {email => {
                                                                                                                                         this.setState({email})}
                                                                                                                                     }/>
-                <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {true}/>
+                <TouchableOpacity onPress={()=>{
+                    if (this.state.mostraPassword==false){
+                        this.setState({mostraPassword:true})
+                    }else{
+                        this.setState({mostraPassword:false})
+                    }
+                                }}>
+                    <Text>
+                        Mostra password 
+                    </Text>
+                </TouchableOpacity>
+                <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
                 <TouchableOpacity>
                 <Text style = {styles.scrittura}>
                     Hai dimenticato la password ?
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
-                            console.log(this.state.email)
-                            const email = this.state.email
-                            console.log(this.state.password)
-                            const password = this.state.password
-                            firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
-                                this.props.navigation.navigate("BarbierePrincipale")
-                            }).catch(email => {
-                                console.log("errato")
-                            })
+                            if (this.state.email == null){
+                                alert("EMAIL ERRATA")
+                            }else if(this.state.password == null){
+                                alert("PASSWORD ERRATA")  
+                            }else{
+                                console.log(this.state.email)
+                                const email = this.state.email
+                                console.log(this.state.password)
+                                const password = this.state.password
+                                firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
+                                    this.props.navigation.navigate("BarbierePrincipale")
+                                }).catch(email => {
+                                    alert("EMAIL E PASSWORD ERRATA")
+                                })
+                            }
                         }
-                    }   
-               >
-                <Text style = {styles.login}>
-                    LOGIN
-                </Text>
+                    }
+                >
+                    <Text style = {styles.login}>
+                        LOGIN
+                    </Text>
                 </TouchableOpacity>
             </View>
         )
