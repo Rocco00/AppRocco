@@ -19,18 +19,6 @@ class Login extends React.Component {
                 </TouchableOpacity>
                 <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} onChangeText = {email => {
                                                                                                                                         this.setState({email})}
-                                                                                                                                    }/>
-                <TouchableOpacity onPress={()=>{
-                    if (this.state.mostraPassword==false){
-                        this.setState({mostraPassword:true})
-                    }else{
-                        this.setState({mostraPassword:false})
-                    }
-                                }}>
-                    <Text>
-                        Mostra password 
-                    </Text>
-                </TouchableOpacity>
                 <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
                 <TouchableOpacity>
                 <Text style = {styles.scrittura}>
