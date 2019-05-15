@@ -1,6 +1,7 @@
 import React from "react";
 import {View,Text,Image,TouchableOpacity,TextInput,StyleSheet} from "react-native";
 import {firebase} from "../config";
+import { Ionicons } from "@expo/vector-icons";
 class Login extends React.Component {
     constructor(props){
         super(props)
@@ -19,33 +20,50 @@ class Login extends React.Component {
                 </TouchableOpacity>
                 <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} onChangeText = {email => {
                                                                                                                                         this.setState({email})}
-                                                                                                                                    }/>
-        
-                <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
+                
+                                                                                                                                 }/>
+                <View style = {styles.occhioPassword}>
+                    <TouchableOpacity style = {styles.viewPassword} onPress={()=>{
+                        if (this.state.mostraPassword==false){
+                            this.setState({mostraPassword:true})
+                        }else{
+                            this.setState({mostraPassword:false})
+                        }
+                                }}>
+                        
+                        <Ionicons name= "ios-eye" size ={35}/>
+                    </TouchableOpacity>
+                
+                    <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
+                </View>
                 <TouchableOpacity>
                 <Text style = {styles.scrittura}>
                     Hai dimenticato la password ?
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
-                            if (this.state.email == null){
-                                alert("EMAIL ERRATA")
-                            }else if(this.state.password == null){
-                                alert("PASSWORD ERRATA")  
-                            }else{
-                                console.log(this.state.email)
-                                const email = this.state.email
-                                console.log(this.state.password)
-                                const password = this.state.password
-                                firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
-                                    this.props.navigation.navigate("BarbierePrincipale")
-                                }).catch(email => {
-                                    alert("EMAIL E PASSWORD ERRATA")
-                                })
-                            }
-                        }
-                    }
-                >
+                      console.log(this.state.email)
+                      const email = this.state.email
+                      console.log(this.state.password)
+                      const password = this.state.password
+                      if (this.state.email == null){
+                          alert("EMAIL ERRATA")
+                      }else if(this.state.password == null){
+                          alert("PASSWORD ERRATA")  
+                      }else{
+                          console.log(this.state.email)
+                          const email = this.state.email
+                          console.log(this.state.password)
+                          const password = this.state.password
+                          firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
+                              this.props.navigation.navigate("BarbierePrincipale")
+                          }).catch(email => {
+                              alert("EMAIL E PASSWORD ERRATA")
+                          })
+                      }
+                  }
+              }   
+         >
                     <Text style = {styles.login}>
                         LOGIN
                     </Text>
@@ -87,6 +105,16 @@ const styles = StyleSheet.create({
         textAlign:"center",
         marginTop:15,
         marginBottom:15,
+    },
+    viewPassword:{
+        position:"absolute",
+        right:5,
+        top:"32%",
+        zIndex:1,
+    },
+    occhioPassword:{
+        position:"relative",
+        flexDirection:"row",
     },
 })
 export default Login

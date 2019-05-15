@@ -6,9 +6,7 @@ class BarbierePrenotazioni extends React.Component {
         return (
             <View>
                 <Calendar
-                    current = {"2012-05-15"}
-                    minDate = {"2012-05-08"}
-                    maxDate = {"2012-05-31"}
+                    current = {new Date()}
                     monthFormat = {"yyyy MMMM"}
                     hideExtraDays = { true }
                     hideArrows = { false }
