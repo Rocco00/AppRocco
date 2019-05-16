@@ -1,11 +1,13 @@
 import React from "react";
 import {View,Text,Image,TouchableOpacity,TextInput,StyleSheet} from "react-native";
-import {firebase} from "../config";
+import {firebase,db} from "../config";
 import { Ionicons } from "@expo/vector-icons";
 class Login extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+            email:"rocco.biancardi@libero.it",
+            password:"prova00",
             mostraPassword:true
         }
     }
@@ -18,7 +20,7 @@ class Login extends React.Component {
                     REGISTRATI
                 </Text>
                 </TouchableOpacity>
-                <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} onChangeText = {email => {
+                <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} defaultValue={this.state.email} onChangeText = {email => {
                                                                                                                                         this.setState({email})}
                 
                                                                                                                                  }/>
@@ -34,7 +36,7 @@ class Login extends React.Component {
                         <Ionicons name= "ios-eye" size ={35}/>
                     </TouchableOpacity>
                 
-                    <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
+                    <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} defaultValue={this.state.password} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
                 </View>
                 <TouchableOpacity>
                 <Text style = {styles.scrittura}>
@@ -55,10 +57,25 @@ class Login extends React.Component {
                           const email = this.state.email
                           console.log(this.state.password)
                           const password = this.state.password
-                          firebase.auth().signInWithEmailAndPassword(email,password).then(email => {
-                              this.props.navigation.navigate("BarbierePrincipale")
-                          }).catch(email => {
-                              alert("EMAIL E PASSWORD ERRATA")
+                          firebase.auth().signInWithEmailAndPassword(email,password).then(utente => {
+                              //this.props.navigation.navigate("BarbierePrincipale")
+                              console.log(this)
+                              var navigation=this.props.navigation
+
+                              const risultato=db.ref("utenti/"+utente.user.uid).once("value").then(function(snapshot){
+                                  var utente = snapshot.val() 
+                                  console.log(utente)
+                                  if(utente.tipo=="barbiere"){
+                                    navigation.navigate("BarbierePrincipale")
+                                    
+                                  }else if (utente.tipo=="cliente"){
+                                          //aprire schermo del cliente
+                                      }
+                                  
+                              })
+                              
+                          }).catch(errore => {
+                              console.log(errore) //alert("EMAIL E PASSWORD ERRATA")
                           })
                       }
                   }
