@@ -15,7 +15,10 @@ class Login extends React.Component {
         return (
             <View style = {styles.centrale}>
                 <Image source = {require ("../logo.png")} style = {styles.principale} resizeMode = "contain" />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClienteRegistrazione")
+                }
+            }>
                  <Text style = {styles.registrati}>
                     REGISTRATI
                 </Text>
@@ -48,20 +51,15 @@ class Login extends React.Component {
                       const email = this.state.email
                       console.log(this.state.password)
                       const password = this.state.password
-                      if (this.state.email == null){
+                      if ( email == null){
                           alert("EMAIL ERRATA")
-                      }else if(this.state.password == null){
+                      }else if(password == null){
                           alert("PASSWORD ERRATA")  
-                      }else{
-                          console.log(this.state.email)
-                          const email = this.state.email
-                          console.log(this.state.password)
-                          const password = this.state.password
+                      }else{                    
                           firebase.auth().signInWithEmailAndPassword(email,password).then(utente => {
                               //this.props.navigation.navigate("BarbierePrincipale")
-                              console.log(this)
                               var navigation=this.props.navigation
-
+                              console.log(utente)
                               const risultato=db.ref("utenti/"+utente.user.uid).once("value").then(function(snapshot){
                                   var utente = snapshot.val() 
                                   console.log(utente)
