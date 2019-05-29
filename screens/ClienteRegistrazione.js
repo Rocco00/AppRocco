@@ -1,9 +1,21 @@
 import React from "react";
-import {View,Text,StyleSheet,TouchableOpacity,TextInput} from "react-native";
+import {View,Text,StyleSheet,TouchableOpacity,TextInput,KeyboardAvoidingView} from "react-native";
+import {firebase,db } from "../config";
 class ClienteRegistrazione extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            nome:null,
+            cognome:null,
+            email:null,
+            password:null,
+            cellulare:null,
+            shop:null,
+        }
+    }
     render (){
         return (
-            <View>
+            <KeyboardAvoidingView behavior = "padding" enabled>
                 <View style = {styles.centrale}>
                     <Text style = {styles.ovale1}>
                         REGISTRAZIONE 
@@ -12,47 +24,91 @@ class ClienteRegistrazione extends React.Component {
                     <Text>
                         NOME
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloRosso}/>
-                    </TouchableOpacity>
+                    <TextInput textContentType = "name" style = {styles.rettangoloRosso} onChangeText ={nome =>{
+                                                                                                            this.setState({nome})}
+                                                                                                        }/>
                     <Text>
                         COGNOME
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloBlu}/>
-                    </TouchableOpacity>
+                    
+                    <TextInput textContentType = "name" style = {styles.rettangoloBlu} onChangeText ={cognome =>{
+                                                                                                            this.setState({cognome})}
+                                                                                                        }/>
                     <Text>
                         E-MAIL
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloRosso}/>
-                    </TouchableOpacity>
+                    <TextInput textContentType = "emailAddress" style = {styles.rettangoloRosso} onChangeText ={email =>{
+                                                                                                            this.setState({email})}
+                                                                                                        }/>
                     <Text>
                         PASSWORD
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloBlu}/>
-                    </TouchableOpacity>
+                    <TextInput textContentType = "password" style = {styles.rettangoloBlu} onChangeText ={password =>{
+                                                                                                            this.setState({password})}
+                                                                                                        }/>
                     <Text>
                         CELLULARE
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloRosso}/>
-                    </TouchableOpacity>
+                    <TextInput textContentType = "telephoneNumber" style = {styles.rettangoloRosso} onChangeText ={cellulare =>{
+                                                                                                            this.setState({cellulare})}
+                                                                                                        }/>
                     <Text>
                         SHOP
                     </Text>
-                    <TouchableOpacity>
-                    <TextInput textContentType = "nome" style = {styles.rettangoloBlu}/>
-                    </TouchableOpacity>
+                    <TextInput textContentType = "none" style = {styles.rettangoloBlu} onChangeText ={shop =>{
+                                                                                                            this.setState({shop})}
+                                                                                                        }/>
                     <View style = {styles.centrale}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                      const nome = this.state.nome
+                      const cognome = this.state.cognome
+                      const email = this.state.email
+                      const password = this.state.password
+                      const cellulare = this.state.cellulare
+                      const shop = this.state.shop
+                      if ( nome == null){
+                          alert("NOME ERRATO")
+                      }else if(cognome == null){
+                          alert("COGNOME ERRATO")
+                      }else if(email == null){
+                          alert("EMAIL ERRATA")
+                      }else if(password == null){
+                          alert("PASSWORD ERRATA")
+                      }else if(cellulare == null){
+                          alert("CELLULARE ERRATO")
+                      }else if(shop == null){
+                          alert("SHOP NON ESISTE")
+                      }else{
+
+                        db.ref("barbiere/"+shop).once("value",snapshot =>{
+                            if (snapshot.exists()){
+                                firebase.auth().createUserWithEmailAndPassword(email,password).then(data =>{
+                                console.log(data)
+                                var uid_utente = data.user.uid
+                                db.ref("utenti/"+uid_utente).set({
+                                    nome,
+                                    cognome,
+                                    email,
+                                    cellulare,
+                                    shop,
+                                    tipo:"cliente"
+                                })
+                                }).catch(errore => {
+                                    alert("Email già esiste")
+                                    console.log(errore)
+                                })
+                            }else{
+                                alert("SHOP NON ESISTE")
+                            }
+                        })
+                      }
+                      }}>
                     <Text style = {styles.ovale1}>
                         CONFERMA 
                     </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
