@@ -5,6 +5,10 @@ import BarbierePrenotazioni from "./screens/BarbierePrenotazioni";
 import BarbiereRiepilogo from "./screens/BarbiereRiepilogo";
 import BookFoto from "./screens/BookFoto";
 import ClienteRegistrazione from "./screens/ClienteRegistrazione";
+import ClienteMenu from "./screens/ClienteMenu";
+import ClienteMioProfilo from "./screens/ClienteMioProfilo";
+import ClientePrenotazioni from "./screens/ClientePrenotazioni";
+import ClienteRiepilogo from "./screens/ClienteRiepilogo";
 const LoginNavigation = createStackNavigator({
     Login:{
         screen:Login,
@@ -23,6 +27,18 @@ const LoginNavigation = createStackNavigator({
     },
     ClienteRegistrazione:{
         screen:ClienteRegistrazione,
+    },
+    ClienteMenu:{
+        screen:ClienteMenu,
+    },
+    ClienteMioProfilo:{
+        screen:ClienteMioProfilo,
+    },
+    ClientePrenotazioni:{
+        screen:ClientePrenotazioni,
+    },
+    ClienteRiepilogo:{
+        screen:ClienteRiepilogo,
     },
 })
 const app = createAppContainer(LoginNavigation)

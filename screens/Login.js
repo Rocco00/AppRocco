@@ -6,7 +6,7 @@ class Login extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            email:"rocco.biancardi@libero.it",
+            email:"roky2000@hotmail.it",
             password:"prova00",
             mostraPassword:true
         }
@@ -47,6 +47,7 @@ class Login extends React.Component {
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClienteMenu")
                       console.log(this.state.email)
                       const email = this.state.email
                       console.log(this.state.password)
