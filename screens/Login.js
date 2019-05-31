@@ -16,7 +16,7 @@ class Login extends React.Component {
             <View style = {styles.centrale}>
                 <Image source = {require ("../logo.png")} style = {styles.principale} resizeMode = "contain" />
                 <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("ClienteRegistrazione")
+                    this.props.navigation.navigate("ClienteOrario")
                 }
             }>
                  <Text style = {styles.registrati}>

@@ -9,6 +9,8 @@ import ClienteMenu from "./screens/ClienteMenu";
 import ClienteMioProfilo from "./screens/ClienteMioProfilo";
 import ClientePrenotazioni from "./screens/ClientePrenotazioni";
 import ClienteRiepilogo from "./screens/ClienteRiepilogo";
+import ClientePrenotazioneConfermata from "./screens/ClientePrenotazioneConfermata";
+import ClienteOrario from "./screens/ClienteOrario";
 const LoginNavigation = createStackNavigator({
     Login:{
         screen:Login,
@@ -40,6 +42,12 @@ const LoginNavigation = createStackNavigator({
     ClienteRiepilogo:{
         screen:ClienteRiepilogo,
     },
+    ClientePrenotazioneConfermata:{
+        screen:ClientePrenotazioneConfermata,
+    },
+    ClienteOrario:{
+        screen:ClienteOrario,
+    },
 })
 const app = createAppContainer(LoginNavigation)
-export default app 
+export default app
