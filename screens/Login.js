@@ -16,14 +16,14 @@ class Login extends React.Component {
             <View style = {styles.centrale}>
                 <Image source = {require ("../logo.png")} style = {styles.principale} resizeMode = "contain" />
                 <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("ClienteOrario")
+                    this.props.navigation.navigate("ClienteRegistrazione")
                 }
             }>
                  <Text style = {styles.registrati}>
                     REGISTRATI
                 </Text>
                 </TouchableOpacity>
-                <TextInput textContentType = "emailAddress" placeholder = "EMAIL" style = {styles.rettangolo} defaultValue={this.state.email} onChangeText = {email => {
+                <TextInput textContentType = "emailAddress" autoCapitalize = "none" placeholder = "EMAIL" style = {styles.rettangolo} defaultValue={this.state.email} onChangeText = {email => {
                                                                                                                                         this.setState({email})}
                 
                                                                                                                                  }/>

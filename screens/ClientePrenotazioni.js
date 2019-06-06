@@ -11,8 +11,11 @@ class ClientePrenotazioni extends React.Component {
                     hideExtraDays = { true }
                     hideArrows = { false }
                     firstDay = { 1 }
-                    // onDayPress ={(day)=>{
-                    //     this.props.navigation.navigate("ClienteRiepilogo")}}
+                    onDayPress ={(giornoSelezionato)=>{
+                        this.props.navigation.navigate("ClienteConfermiLaPrenotazione",{
+                            giornoSelezionato
+                        })
+                    }}
                 />
             </View>
     )

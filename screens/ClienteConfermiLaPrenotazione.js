@@ -1,11 +1,11 @@
 import React from "react";
-import {View,Text,StyleSheet,TouchableOpacity} from "react-native";
-class ClienteRiepilogo extends React.Component {
+import {View,StyleSheet,Text,TouchableOpacity} from "react-native";
+class ClienteConfermiLaPrenotazione extends React.Component {
     render(){
         return(
             <View>
-                <Text style = {styles.testoNegozio1}>
-                    LE MIE PRENOTAZIONI
+                <Text style = {styles.testoNegozio}>
+                    CONFERMA LA PRENOTAZIONE
                 </Text>
                 <View style = {styles.rettangolo}>
                     <View>
@@ -33,9 +33,12 @@ class ClienteRiepilogo extends React.Component {
                     </View>
                 </View>
                 <View style = {styles.centrale}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClientePrenotazioneConfermata")
+                }
+            }>
                 <Text style = {styles.ovale1}>
-                        CANCELLARE
+                        CONFERMA 
                     </Text>
                 </TouchableOpacity>
                 </View>
@@ -66,12 +69,6 @@ const styles = StyleSheet.create({
             alignItems:"center",
             paddingLeft:10,
             paddingRight:10,
-            color:"#ff0000",
-        },
-        testoNegozio1:{
-            fontSize:30,
-            textAlign:"center",
-            color:"#ff0000",
         },
         testoNegozio:{
             fontSize:30,
@@ -89,5 +86,6 @@ const styles = StyleSheet.create({
             justifyContent:"center",
             alignItems:"center",
         },
+
 })
-export default ClienteRiepilogo
+export default ClienteConfermiLaPrenotazione

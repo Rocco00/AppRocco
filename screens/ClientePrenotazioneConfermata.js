@@ -14,7 +14,10 @@ class ClientePrenotazioneConfermata extends React.Component {
             </View>
             <View style = {styles.indietro_e_avanti}>
                     <View style = {styles.sinistra}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClienteMenu")
+                }
+            }>
                         <Image source = {require("../Sinistra.png")} style = {[styles.immagine2,styles.sinistra2]}/>
                         <Text style = {styles.testoIcone}>
                         PER TORNARE AL MENU' PRINCIPALE 
@@ -22,7 +25,10 @@ class ClientePrenotazioneConfermata extends React.Component {
                     </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity style = {styles.destra}>
+                        <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClienteRiepilogo")
+                }
+            } style = {styles.destra}>
                         <Image source = {require("../Destra.png")} style = {styles.immagine2}/>
                         <Text style = {styles.testoIcone}>
                         PER VEDERE LE TUE PRENOTAZIONI 
