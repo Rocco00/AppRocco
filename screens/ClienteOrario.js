@@ -1,6 +1,14 @@
 import React from "react";
 import {View,Image,StyleSheet,Text,TouchableOpacity} from "react-native";
 class ClienteOrario extends React.Component {
+    constructor(props){
+        super(props)
+        this.props.navigation.getParam("giornoSelezionato")
+        estrarre_giorno = this.props.navigation.getParam("giornoSelezionato")
+        console.log(estrarre_giorno)
+        this.setState({estrarre_giorno:estrarre_giorno})
+        var orario = ["08:00",]
+    }
     render(){
         return(
             <View>
@@ -10,7 +18,10 @@ class ClienteOrario extends React.Component {
                 </Text>
                 </View>
                 <View style = {styles.sinistra_e_destra}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("ClienteConfermiLaPrenotazione")
+                }
+            }>
                     <View style = {styles.collonna}>
                     <Image source = {require("../orologio.png")}/>
                     <Text>

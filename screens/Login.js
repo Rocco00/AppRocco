@@ -47,7 +47,6 @@ class Login extends React.Component {
                 </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("ClienteMenu")
                       console.log(this.state.email)
                       const email = this.state.email
                       console.log(this.state.password)
@@ -68,13 +67,14 @@ class Login extends React.Component {
                                     navigation.navigate("BarbierePrincipale")
                                     
                                   }else if (utente.tipo=="cliente"){
-                                          //aprire schermo del cliente
+                                    navigation.navigate("ClienteMenu")
                                       }
                                   
                               })
                               
                           }).catch(errore => {
-                              console.log(errore) //alert("EMAIL E PASSWORD ERRATA")
+                              console.log(errore) 
+                              alert("EMAIL O PASSWORD ERRATA")
                           })
                       }
                   }

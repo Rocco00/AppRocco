@@ -10,7 +10,7 @@ class ClienteConfermiLaPrenotazione extends React.Component {
                 <View style = {styles.rettangolo}>
                     <View>
                     <Text style = {styles.testoNegozio}>
-                        BARBER SHOP
+                        BARBER SHOP CIAO
                     </Text>
                     </View>
                     

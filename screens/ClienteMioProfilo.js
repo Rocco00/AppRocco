@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     ovale1:{
         width:230,
         height:40,
-        borderRadius:50,
+        borderRadius:25,
         borderWidth:1,
         borderColor:"#808080",
         fontSize:25,

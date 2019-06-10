@@ -1,6 +1,7 @@
 import React from "react";
 import {View,} from "react-native";
 import {Calendar} from "react-native-calendars";
+import {LocaleConfig} from 'react-native-calendars';
 class ClientePrenotazioni extends React.Component {
     render (){
         return (
@@ -12,10 +13,11 @@ class ClientePrenotazioni extends React.Component {
                     hideArrows = { false }
                     firstDay = { 1 }
                     onDayPress ={(giornoSelezionato)=>{
-                        this.props.navigation.navigate("ClienteConfermiLaPrenotazione",{
+                        this.props.navigation.navigate("ClienteOrario",{
                             giornoSelezionato
                         })
                     }}
+                    
                 />
             </View>
     )
