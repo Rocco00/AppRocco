@@ -1,7 +1,17 @@
 import React from "react";
 import {View,StyleSheet,Text,TouchableOpacity} from "react-native";
+import {firebase,db } from "../config";
 class ClienteConfermiLaPrenotazione extends React.Component {
+    constructor(props){
+        super(props)
+        estrarre_giorno = this.props.navigation.getParam("estrarre_giorno")
+        estrarre_ora = this.props.navigation.getParam("ora")
+        this.state = {estrarre_giorno:estrarre_giorno,estrarre_ora:estrarre_ora}
+    }
     render(){
+        var mesi = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre",]
+
+        
         return(
             <View>
                 <Text style = {styles.testoNegozio}>
@@ -16,24 +26,38 @@ class ClienteConfermiLaPrenotazione extends React.Component {
                     
                     <View style = {styles.spazio}>
                     <Text style = {styles.testoGenerale}>
-                        MESE ->
+                        MESE -> {mesi[this.state.estrarre_giorno.month-1]}
                     </Text>
                     </View>
                     
                     <View style = {styles.spazio}>
                     <Text style = {styles.testoGenerale}>
-                        GIORNO ->
+                        GIORNO -> {this.state.estrarre_giorno.day}
                     </Text>
                     </View>
                     
                     <View style = {styles.spazio}>
                     <Text style = {styles.testoGenerale}>
-                        ORARIO ->
+                        ORARIO -> {this.state.estrarre_ora}
                     </Text>
                     </View>
                 </View>
                 <View style = {styles.centrale}>
                 <TouchableOpacity onPress={()=>{
+                    var annoSalvato = this.state.estrarre_giorno.year
+                    var meseSalvato = this.state.estrarre_giorno.month
+                    var giornoSalvato = this.state.estrarre_giorno.day
+                    var orarioSalvato = this.state.estrarre_ora
+                    prenotazione = {
+                        anno:annoSalvato,
+                        mese:meseSalvato,
+                        giorno:giornoSalvato,
+                        orario:orarioSalvato,
+                        cliente:global.utenteuid,
+                        shop:global.utente.shop
+                    }
+                    console.log(prenotazione)
+                    db.ref("prenotazione").push(prenotazione)
                     this.props.navigation.navigate("ClientePrenotazioneConfermata")
                 }
             }>

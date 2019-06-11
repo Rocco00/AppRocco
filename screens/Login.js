@@ -59,10 +59,12 @@ class Login extends React.Component {
                           firebase.auth().signInWithEmailAndPassword(email,password).then(utente => {
                               //this.props.navigation.navigate("BarbierePrincipale")
                               var navigation=this.props.navigation
-                              console.log(utente)
-                              const risultato=db.ref("utenti/"+utente.user.uid).once("value").then(function(snapshot){
-                                  var utente = snapshot.val() 
-                                  console.log(utente)
+                              var uid 
+                              uid = utente.user.uid
+                              const risultato=db.ref("utenti/"+uid).once("value").then(function(snapshot){
+                                  var utente = snapshot.val()
+                                  global.utente=utente //serve per sapere il tipo di utente in qualsiasi schermo
+                                  global.utenteuid=uid // serve per sapere ID dell'utente
                                   if(utente.tipo=="barbiere"){
                                     navigation.navigate("BarbierePrincipale")
                                     

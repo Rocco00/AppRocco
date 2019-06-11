@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 1795,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://49-fmn.anonymous.rocco-hair.exp.direct",
   "packagerNgrokUrl": "https://packager.49-fmn.anonymous.rocco-hair.exp.direct",
-  "ngrokPid": 1812,
+  "ngrokPid": 571,
   "webpackServerPort": null
 }
