@@ -1,9 +1,30 @@
 import React from "react";
 import {View,Text,StyleSheet,TouchableOpacity} from "react-native";
+import { db } from "../config";
+import { ScrollView } from "react-native-gesture-handler";
 class ClienteRiepilogo extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            prenotazione:{
+                
+            }
+        }
+    }
+    componentDidMount(){
+        var questo = this
+        db.ref("prenotazione").on("value",function(snapshot){
+            var prenotazione = snapshot.val()
+            questo.setState({prenotazione:prenotazione})
+        })
+    }
+        
     render(){
+        var mesi = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre",]
+        console.log(this.state.prenotazione)
         return(
-            <View>
+        <ScrollView>
+
                 <Text style = {styles.testoNegozio1}>
                     LE MIE PRENOTAZIONI
                 </Text>
@@ -13,33 +34,47 @@ class ClienteRiepilogo extends React.Component {
                         BARBER SHOP
                     </Text>
                     </View>
-                    
-                    <View style = {styles.spazio}>
-                    <Text style = {styles.testoGenerale}>
-                        MESE ->
-                    </Text>
+                    <View>
+                        {Object.keys(this.state.prenotazione).map((key)=>{
+                            var numeroPrenotazione = this.state.prenotazione[key]
+                            console.log(numeroPrenotazione)
+                            
+                            return(
+                            <View key={key}>
+
+                                <View style = {styles.spazio}>
+                                <Text style = {styles.testoGenerale}>
+                                    MESE -> {mesi[numeroPrenotazione.mese-1]}
+                                </Text>
+                                </View>
+                                
+                                <View style = {styles.spazio}>
+                                <Text style = {styles.testoGenerale}>
+                                    GIORNO -> {numeroPrenotazione.giorno}
+                                </Text>
+                                </View>
+                                
+                                <View style = {styles.spazio}>
+                                <Text style = {styles.testoGenerale}>
+                                    ORARIO -> {numeroPrenotazione.orario}
+                                </Text>
+                                </View>
+                                <View style = {styles.centrale}>
+                                <TouchableOpacity onPress={()=>{
+                                    db.ref("prenotazione/"+key).remove()
+                                }}>
+                                <Text style = {styles.ovale1}>
+                                        CANCELLARE
+                                    </Text>
+                                </TouchableOpacity>
+                                </View>
+                                </View>
+                            )
+                        })}
                     </View>
-                    
-                    <View style = {styles.spazio}>
-                    <Text style = {styles.testoGenerale}>
-                        GIORNO ->
-                    </Text>
-                    </View>
-                    
-                    <View style = {styles.spazio}>
-                    <Text style = {styles.testoGenerale}>
-                        ORARIO ->
-                    </Text>
-                    </View>
+
                 </View>
-                <View style = {styles.centrale}>
-                <TouchableOpacity>
-                <Text style = {styles.ovale1}>
-                        CANCELLARE
-                    </Text>
-                </TouchableOpacity>
-                </View>
-            </View>
+            </ScrollView>
         )
     }
 }

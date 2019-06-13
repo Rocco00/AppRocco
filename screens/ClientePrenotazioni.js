@@ -1,6 +1,15 @@
 import React from "react";
 import {View,} from "react-native";
-import {Calendar} from "react-native-calendars";
+import {Calendar,LocaleConfig} from "react-native-calendars";
+
+LocaleConfig.locales["it"] = {
+    monthNames:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
+    monthNamesShort: ["Genn","Febbr","Marzo","Apr","Magg","Giugno","Luglio","Agosto","Sett","Ott","Nov","Dic"],
+    dayNames: ["Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato","Domenica"],
+    dayNamesShort: ["Lun","Mart","Merc","Gio","Ven","Sab","Dom"],
+    today: "Oggi",
+};
+LocaleConfig.defaultLocale = "it";
 class ClientePrenotazioni extends React.Component {
     render (){
         return (
@@ -16,6 +25,7 @@ class ClientePrenotazioni extends React.Component {
                             giornoSelezionato
                         })
                     }}
+                    
                     
                 />
             </View>
