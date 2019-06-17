@@ -22,10 +22,14 @@ class BarbierePrenotazioni extends React.Component {
         var prenotazioneSelezionata = {}
         var questo = this
         Object.keys(this.state.prenotazione).map(function(key){
-        var oggetto = questo.state.prenotazione[key]
-        var nuovaPrenotazioneSelezionata = oggetto.anno + "-" + oggetto.mese + "-" + oggetto.giorno
-        prenotazioneSelezionata[nuovaPrenotazioneSelezionata]={marked: true}
-     })
+            var unicaPrenotazione = questo.state.prenotazione[key]
+            var valoreMese = unicaPrenotazione.mese
+            if (unicaPrenotazione.mese<=9){
+                valoreMese = "0"+unicaPrenotazione.mese
+            }
+            var nuovaPrenotazioneSelezionata = unicaPrenotazione.anno + "-" + valoreMese + "-" + unicaPrenotazione.giorno
+            prenotazioneSelezionata[nuovaPrenotazioneSelezionata]={marked: true}
+        })
         console.log(prenotazioneSelezionata)
         return (
             <View>
@@ -36,8 +40,12 @@ class BarbierePrenotazioni extends React.Component {
                     hideArrows = { false }
                     firstDay = { 1 }
                     markedDates={prenotazioneSelezionata}
-                    onDayPress ={(day)=>{
-                        this.props.navigation.navigate("BarbiereRiepilogo")}}
+                    onDayPress ={(giornoSelezionato)=>{
+                        this.props.navigation.navigate("BarbiereRiepilogo",{
+                            estrarre_giorno:giornoSelezionato,
+                            tutte_le_prenotazioni:this.state.prenotazione,
+                        })
+                    }}
                 />
             </View>
     )
