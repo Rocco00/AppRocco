@@ -1,6 +1,18 @@
 import React from "react";
 import {View,Text,StyleSheet,TouchableOpacity,TextInput,KeyboardAvoidingView} from "react-native";
 class ClienteMioProfilo extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            nome:null,
+            cognome:null,
+            email:null,
+            password:null,
+            cellulare:null,
+            shop:null,
+            mostraPassword:true
+        }
+    }
     render (){
         return (
             <KeyboardAvoidingView behavior = "padding" enabled>
@@ -31,7 +43,7 @@ class ClienteMioProfilo extends React.Component {
                     <Text>
                         PASSWORD
                     </Text>
-                    <TextInput textContentType = "password" style = {styles.rettangoloBlu} onChangeText ={password =>{
+                    <TextInput textContentType = "password" style = {styles.rettangoloBlu} secureTextEntry = {true} onChangeText ={password =>{
                                                                                                             this.setState({password})}
                                                                                                         }/>
                     <Text>
@@ -47,7 +59,29 @@ class ClienteMioProfilo extends React.Component {
                                                                                                             this.setState({shop})}
                                                                                                         }/>
                     <View style = {styles.centrale}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                      const nome = this.state.nome
+                      const cognome = this.state.cognome
+                      const email = this.state.email
+                      const password = this.state.password
+                      const cellulare = this.state.cellulare
+                      const shop = this.state.shop
+                      if ( nome == null){
+                          alert("NOME ERRATO")
+                      }else if(cognome == null){
+                          alert("COGNOME ERRATO")
+                      }else if(email == null){
+                          alert("EMAIL ERRATA")
+                      }else if(password == null){
+                          alert("PASSWORD ERRATA")
+                      }else if(cellulare == null){
+                          alert("CELLULARE ERRATO")
+                      }else if(shop == null){
+                          alert("SHOP NON ESISTE")
+                      }else{
+                          
+                      }
+                    }}>
                     <Text style = {styles.ovale1}>
                         SALVA
                     </Text>

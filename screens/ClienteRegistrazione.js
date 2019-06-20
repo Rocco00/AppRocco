@@ -37,7 +37,7 @@ class ClienteRegistrazione extends React.Component {
                     <Text>
                         E-MAIL
                     </Text>
-                    <TextInput textContentType = "emailAddress" style = {styles.rettangoloRosso} onChangeText ={email =>{
+                    <TextInput textContentType = "emailAddress" autoCapitalize = "none" style = {styles.rettangoloRosso} onChangeText ={email =>{
                                                                                                             this.setState({email})}
                                                                                                         }/>
                     <Text>
@@ -93,9 +93,10 @@ class ClienteRegistrazione extends React.Component {
                                     shop,
                                     tipo:"cliente"
                                 })
+                                this.props.navigation.navigate("ClienteRegistrazioneConfermata")
                                 }).catch(errore => {
                                     alert("Email già esiste")
-                                    console.log(errore)
+                                    //console.log(errore)
                                 })
                             }else{
                                 alert("SHOP NON ESISTE")

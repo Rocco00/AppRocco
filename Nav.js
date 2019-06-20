@@ -12,6 +12,9 @@ import ClienteRiepilogo from "./screens/ClienteRiepilogo";
 import ClientePrenotazioneConfermata from "./screens/ClientePrenotazioneConfermata";
 import ClienteOrario from "./screens/ClienteOrario";
 import ClienteConfermiLaPrenotazione from "./screens/ClienteConfermiLaPrenotazione";
+import ClienteRegistrazioneConfermata from "./screens/ClienteRegistrazioneConfermata";
+import HaiDimenticatoLaPassword from "./screens/HaiDimenticatoLaPassword";
+import EmailRecuperoPassword from "./screens/EmailRecuperoPassword";
 const LoginNavigation = createStackNavigator({
     Login:{
         screen:Login,
@@ -51,6 +54,15 @@ const LoginNavigation = createStackNavigator({
     },
     ClienteConfermiLaPrenotazione:{
         screen:ClienteConfermiLaPrenotazione
+    },
+    ClienteRegistrazioneConfermata:{
+        screen:ClienteRegistrazioneConfermata
+    },
+    HaiDimenticatoLaPassword:{
+        screen:HaiDimenticatoLaPassword
+    },
+    EmailRecuperoPassword:{
+        screen:EmailRecuperoPassword
     },
 })
 const app = createAppContainer(LoginNavigation)

@@ -1,5 +1,6 @@
 import React from "react";
 import {View,Text,StyleSheet,TouchableOpacity} from "react-native";
+import { db } from "../config";
 class BarbiereRiepilogo extends React.Component {
     constructor(props){
         super(props)
@@ -8,7 +9,18 @@ class BarbiereRiepilogo extends React.Component {
         this.state = {estrarre_giorno:estrarre_giorno,estrarre_tutte_le_prenotazioni:estrarre_tutte_le_prenotazioni}
     }
     render () {
-        console.log(this.state)
+        var prenotazioneGiornaliera = Object.keys(this.state.estrarre_tutte_le_prenotazioni).filter((key)=>{
+            var numeroPrenotazione = this.state.estrarre_tutte_le_prenotazioni[key]
+            if (numeroPrenotazione.anno == this.state.estrarre_giorno.year
+                &&
+                numeroPrenotazione.mese == this.state.estrarre_giorno.month
+                &&
+                numeroPrenotazione.giorno == this.state.estrarre_giorno.day){
+                    return true 
+                }
+            
+        })
+        console.log(prenotazioneGiornaliera)
         return (
             <View style = {styles.centrale}>
                 <View>
@@ -17,16 +29,16 @@ class BarbiereRiepilogo extends React.Component {
                     </Text>
                 </View>
                 <View>
-                        {Object.keys(this.state.estrarre_tutte_le_prenotazioni).map((key)=>{
+                        {prenotazioneGiornaliera.map((key)=>{
                             var numeroPrenotazione = this.state.estrarre_tutte_le_prenotazioni[key]
-                            console.log(numeroPrenotazione)
+                            
                             
                             return(
                             <View key={key}>
 
                                 <View style = {styles.spazio}>
                                     <Text style = {styles.testoGenerale}>
-                                        NOME -> 
+                                        NOME -> {numeroPrenotazione.cliente.nome}
                                     </Text>
                                 </View>
                                 
@@ -41,6 +53,9 @@ class BarbiereRiepilogo extends React.Component {
                                     ORARIO -> {numeroPrenotazione.orario}
                                 </Text>
                                 </View>
+                                {/* Ho messo come commenti perchè a me non piace l'idea che 
+                                il barbiere può cancellare le prenotazioni dei clienti ma se in futuro
+                                qualche barbiere la chiede questa funzione è la seguente ->
                                 <View style = {styles.centrale}>
                                 <TouchableOpacity onPress={()=>{
                                     db.ref("prenotazione/"+key).remove()
@@ -49,7 +64,7 @@ class BarbiereRiepilogo extends React.Component {
                                         CANCELLARE
                                     </Text>
                                 </TouchableOpacity>
-                                </View>
+                                </View> */}
                             </View>
                             )
                         })}

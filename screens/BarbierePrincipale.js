@@ -4,12 +4,7 @@ class BarbierePrincipale extends React.Component {
     render () {
         return (
             <View style = {styles.centrale}>
-                <Image source = {require ("../Imagine.png")} style = {styles.principale} resizeMode = "contain" />
-                <View style = {styles.ovale1}> 
-                <Text style = {styles.testo}>
-                    MENU'
-                </Text>
-                </View>
+                <Image source = {require ("../Imagine.png")} style = {styles.logo} resizeMode = "contain" />
                 <Image source = {require ("../calendario.png")} style = {styles.principale} resizeMode = "contain" />
                 <View style = {styles.ovale2}>
                <TouchableOpacity onPress={()=>{
@@ -33,9 +28,15 @@ class BarbierePrincipale extends React.Component {
     }
 }
 const styles = StyleSheet.create({
+    logo:{
+        width:"50%",
+        height:"25%",
+        marginTop:30,
+    },
     principale: {
-        width:"20%",
+        width:"30%",
         height:"20%",
+        marginTop:30,
     },
     rettangolo: {
         borderWidth:1,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         paddingRight:10,
     },
     ovale3:{
-        width:150,
+        width:180,
         height:60,
         borderRadius:50,
         borderWidth:1,

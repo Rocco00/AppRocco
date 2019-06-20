@@ -1,20 +1,22 @@
 import React from "react";
-import {View,Text,Image,TouchableOpacity,TextInput,StyleSheet} from "react-native";
+import {View,Text,Image,TouchableOpacity,TextInput,StyleSheet,KeyboardAvoidingView} from "react-native";
 import {firebase,db} from "../config";
 import { Ionicons } from "@expo/vector-icons";
 class Login extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            email:"rocco.biancardi@libero.it",
+            email:"roky2000@hotmail.it",
             password:"prova00",
             mostraPassword:true
         }
     }
     render (){
         return (
-            <View style = {styles.centrale}>
-                <Image source = {require ("../logo.png")} style = {styles.principale} resizeMode = "contain" />
+            <KeyboardAvoidingView style = {styles.centrale} behavior = "position" enabled >
+                 <View style = {styles.formatoImmagine } >
+                 <Image source = {require ("../logo.png")} style = {styles.principale} resizeMode = "contain" />
+                 </View>
                 <TouchableOpacity onPress={()=>{
                     this.props.navigation.navigate("ClienteRegistrazione")
                 }
@@ -41,7 +43,10 @@ class Login extends React.Component {
                 
                     <TextInput textContentType = "password" placeholder = "PASSWORD" style = {styles.rettangolo} defaultValue={this.state.password} onChangeText = {password => this.setState({password})} secureTextEntry = {this.state.mostraPassword}/>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("HaiDimenticatoLaPassword")
+                }
+            }>
                 <Text style = {styles.scrittura}>
                     Hai dimenticato la password ?
                 </Text>
@@ -61,6 +66,7 @@ class Login extends React.Component {
                               var navigation=this.props.navigation
                               var uid 
                               uid = utente.user.uid
+                              console.log(utente)
                               const risultato=db.ref("utenti/"+uid).once("value").then(function(snapshot){
                                   var utente = snapshot.val()
                                   global.utente=utente //serve per sapere il tipo di utente in qualsiasi schermo
@@ -86,14 +92,14 @@ class Login extends React.Component {
                         LOGIN
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
 const styles = StyleSheet.create({
     principale: {
-        width:"60%",
-        height:"40%",
+        width:260,
+        height:240,
     },
     centrale: {
         justifyContent:"center",
@@ -133,6 +139,11 @@ const styles = StyleSheet.create({
     occhioPassword:{
         position:"relative",
         flexDirection:"row",
+    },
+    formatoImmagine:{
+        alignContent:"center",
+        justifyContent:"center",
+        alignItems:"center",
     },
 })
 export default Login

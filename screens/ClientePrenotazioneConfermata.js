@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     testo:{
         fontSize:25,
         textAlign:"center",
-
     },
     indietro_e_avanti:{
         justifyContent:"space-between",

@@ -12,6 +12,16 @@ LocaleConfig.locales["it"] = {
 LocaleConfig.defaultLocale = "it";
 class ClientePrenotazioni extends React.Component {
     render (){
+        var oggi = new Date()
+        var setteGiorniDopo = new Date()
+        setteGiorniDopo.setDate(oggi.getDate()+7)
+        var addMonth = oggi.getMonth()+1
+        if (addMonth<=9){
+            addMonth = "0"+addMonth
+        }
+        var formatoOggi = oggi.getFullYear() + "-" + addMonth + "-" + oggi.getDate()
+        var sevenDay = setteGiorniDopo.setDate(oggi.getDate()+6)
+
         return (
             <View>
                 <Calendar
@@ -19,7 +29,9 @@ class ClientePrenotazioni extends React.Component {
                     monthFormat = {"yyyy MMMM"}
                     hideExtraDays = { true }
                     hideArrows = { false }
-                    firstDay = { 1 }
+                    minDate={formatoOggi}
+                    maxDate={sevenDay}
+                    firstDay = { 0 }
                     onDayPress ={(giornoSelezionato)=>{
                         this.props.navigation.navigate("ClienteOrario",{
                             giornoSelezionato

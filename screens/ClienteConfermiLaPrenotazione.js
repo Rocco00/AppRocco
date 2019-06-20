@@ -53,7 +53,7 @@ class ClienteConfermiLaPrenotazione extends React.Component {
                         mese:meseSalvato,
                         giorno:giornoSalvato,
                         orario:orarioSalvato,
-                        cliente:global.utenteuid,
+                        cliente:global.utente,
                         shop:global.utente.shop
                     }
                     console.log(prenotazione)
